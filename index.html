@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070816">
+  <title>Beyond The Stars ✦</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="sky" aria-hidden="true">
+    <div class="stars"></div>
+    <div class="moon" id="moon">☾</div>
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+  </div>
+
+  <main class="lock-container">
+    <div class="planet-icon">✦</div>
+
+    <p class="eyebrow">A LITTLE UNIVERSE, JUST FOR YOU</p>
+
+    <h1>Beyond <span>The Stars</span></h1>
+
+    <p class="subtitle">
+      Somewhere between the stars,<br>
+      there's a little place made just for you.
+    </p>
+
+    <div class="lock-card">
+      <div class="lock-icon">♧</div>
+      <h2>Only You Can Enter</h2>
+      <p class="lock-description">
+        Enter our secret PIN to unlock this little universe.
+      </p>
+
+      <form id="pinForm">
+        <label for="pin">YOUR SECRET PIN</label>
+        <input
+          type="password"
+          id="pin"
+          placeholder="••••"
+          inputmode="numeric"
+          maxlength="4"
+          autocomplete="off"
+          required
+        >
+
+        <button type="submit" id="unlockBtn">
+          Enter Our Universe <span>↗</span>
+        </button>
+
+        <p id="message" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <p class="bottom-note">MADE OF MEMORIES & MOONLIGHT ✧</p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070816">
+  <title>Our Little Universe 💙</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 50% 100%, #292052, transparent 55%),
+        linear-gradient(150deg, #070816, #11132b, #080a1b);
+      color: #f4f2ff;
+      font-family: "Segoe UI", Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 25px;
+      overflow-x: hidden;
+    }
+
+    /* MOVING STARS */
+    .stars {
+      position: fixed;
+      inset: -50%;
+      width: 200%;
+      height: 200%;
+      z-index: 0;
+      pointer-events: none;
+
+      background-image:
+        radial-gradient(2px 2px at 15% 20%, #ffffff 50%, transparent 100%),
+        radial-gradient(1px 1px at 75% 35%, #c9c5ff 50%, transparent 100%),
+        radial-gradient(2px 2px at 50% 80%, #ffffff 50%, transparent 100%),
+        radial-gradient(1px 1px at 90% 65%, #b9b2ff 50%, transparent 100%),
+        radial-gradient(2px 2px at 35% 55%, #d8d3ff 50%, transparent 100%),
+        radial-gradient(1px 1px at 65% 12%, #ffffff 50%, transparent 100%);
+
+      background-size: 300px 300px;
+      animation: movingStars 35s linear infinite,
+                 twinkle 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes movingStars {
+      from {
+        transform: translate(0, 0);
+      }
+      to {
+        transform: translate(-100px, -150px);
+      }
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.4; }
+      to { opacity: 1; }
+    }
+
+    /* BIG GLOWING MOON */
+    .moon {
+      position: fixed;
+      top: 22px;
+      right: 28px;
+      color: #eee8ff;
+      font-size: 80px;
+      text-shadow:
+        0 0 20px #c5b7ff,
+        0 0 45px #a99aff,
+        0 0 75px #8476ff;
+      animation: float 4s ease-in-out infinite;
+      cursor: pointer;
+      z-index: 2;
+      user-select: none;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* MAIN CONTENT */
+    .container {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 570px);
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: #b9aaff;
+      font-size: 10px;
+      letter-spacing: 3px;
+    }
+
+    h1 {
+      margin: 18px 0;
+      font-family: Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(35px, 7vw, 52px);
+      line-height: 1.25;
+    }
+
+    h1 span {
+      display: block;
+      color: #c2b7ff;
+      font-style: italic;
+    }
+
+    .description {
+      color: #aaa9c5;
+      font-size: 14px;
+      line-height: 1.9;
+      margin-bottom: 30px;
+    }
+
+    /* GLASS CARD */
+    .glass-card {
+      padding: 22px;
+      border: 1px solid #b8a9ff40;
+      border-radius: 20px;
+      background: #ffffff08;
+      box-shadow: 0 20px 55px #00000030;
+      backdrop-filter: blur(15px);
+    }
+
+    .media-title {
+      color: #c9c0ff;
+      font-family: Georgia, serif;
+      font-size: 21px;
+      margin-bottom: 18px;
+    }
+
+    video {
+      display: block;
+      width: 100%;
+      max-height: 360px;
+      border-radius: 12px;
+      background: #050610;
+      object-fit: contain;
+    }
+
+    .video-note {
+      margin-top: 12px;
+      color: #aaa9c5;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    /* MUSIC PLAYER */
+    .music-section {
+      margin-top: 25px;
+      padding-top: 23px;
+      border-top: 1px solid #b8a9ff25;
+    }
+
+    .music-icon {
+      display: block;
+      margin-bottom: 10px;
+      color: #c9c0ff;
+      font-size: 32px;
+      animation: musicGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes musicGlow {
+      from { text-shadow: 0 0 5px #8476ff; }
+      to { text-shadow: 0 0 25px #a99aff; }
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 16px;
+      height: 42px;
+    }
+
+    /* NAVIGATION */
+    .navigation {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .navigation a {
+      display: inline-block;
+      padding: 13px 18px;
+      border: 1px solid #aaa0ff55;
+      border-radius: 10px;
+      color: #eeeaff;
+      text-decoration: none;
+      font-size: 13px;
+      transition: transform 0.25s, background 0.25s;
+    }
+
+    .navigation a:hover {
+      transform: translateY(-3px);
+      background: #ffffff12;
+    }
+
+    .navigation .next {
+      border: none;
+      background: linear-gradient(100deg, #8e7cf5, #657fe8);
+    }
+
+    .footer {
+      margin-top: 30px;
+      color: #8885ae;
+      font-size: 9px;
+      letter-spacing: 2px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 480px) {
+      body {
+        padding: 18px;
+      }
+
+      .glass-card {
+        padding: 15px;
+      }
+
+      .moon {
+        font-size: 55px;
+        top: 12px;
+        right: 15px;
+      }
+
+      .eyebrow {
+        font-size: 9px;
+      }
+
+      .description {
+        font-size: 13px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Animated background -->
+  <div class="stars" aria-hidden="true"></div>
+  <div class="moon" id="moon" aria-label="Moon">☾</div>
+
+  <main class="container">
+
+    <p class="eyebrow">CHAPTER 03 · A MOMENT TO KEEP</p>
+
+    <h1>
+      Beyond The
+      <span>Memories</span>
+    </h1>
+
+    <p class="description">
+      Some moments are better when we watch them again.<br>
+      Take your time. This little space is just for you. 💙
+    </p>
+
+    <!-- VIDEO SECTION -->
+    <section class="glass-card">
+
+      <h2 class="media-title">Our Little Movie ✦</h2>
+
+      <video controls playsinline preload="metadata">
+        <source src="our-video.mp4" type="video/mp4">
+        Your browser does not support this video.
+      </video>
+
+      <p class="video-note">
+        A little collection of moments worth remembering.
+      </p>
+
+      <!-- MUSIC SECTION -->
+      <div class="music-section">
+
+        <span class="music-icon">♫</span>
+
+        <h2 class="media-title">A Song For This Moment</h2>
+
+        <p class="video-note">
+          Press play and enjoy the music. 🎧
+        </p>
+
+        <audio controls preload="metadata">
+          <source src="song.mp3" type="audio/mpeg">
+          Your browser does not support this audio.
+        </audio>
+
+      </div>
+
+    </section>
+
+    <!-- PAGE LINKS -->
+    <div class="navigation">
+      <a href="gallery.html">← Our Memories</a>
+      <a href="letter.html" class="next">One Last Surprise ✧</a>
+    </div>
+
+    <p class="footer">
+      A LITTLE MOMENT · A LASTING MEMORY
+    </p>
+
+  </main>
+
+  <script>
+    // Moon click effect
+    const moon = document.getElementById("moon");
+
+    moon.addEventListener("click", function () {
+      moon.textContent = moon.textContent === "☾" ? "☽" : "☾";
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,611 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070816">
+  <title>Our Memories ✦</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: #070816;
+      color: #f4f2ff;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    .sky {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 50% 100%, #292052 0%, transparent 50%),
+        linear-gradient(160deg, #070816, #11132b 60%, #080a1b);
+      z-index: 0;
+    }
+
+    
+.stars {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(2px 2px at 15% 20%, #fff 50%, transparent 100%),
+    radial-gradient(1px 1px at 75% 35%, #c9c5ff 50%, transparent 100%),
+    radial-gradient(2px 2px at 50% 80%, #fff 50%, transparent 100%),
+    radial-gradient(1px 1px at 90% 65%, #b9b2ff 50%, transparent 100%);
+
+  background-size: 300px 300px;
+
+  animation: movingStars 30s linear infinite;
+}
+
+@keyframes movingStars {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-100px, -150px);
+  }
+}
+
+
+    
+.moon {
+  position: fixed;
+  top: 22px;
+  right: 28px;
+  color: #eee8ff;
+  font-size: 80px;
+  text-shadow:
+    0 0 20px #c5b7ff,
+    0 0 45px #a99aff,
+    0 0 75px #8476ff;
+  animation: float 4s ease-in-out infinite;
+  cursor: pointer;
+  z-index: 2;
+}
+
+
+    .gallery-page {
+      position: relative;
+      z-index: 1;
+      width: min(92%, 950px);
+      margin: auto;
+      padding: 32px 0 45px;
+    }
+
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      color: #aaa9c5;
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    .top-nav a {
+      color: #c4b8ff;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .heading {
+      margin: 65px 0 40px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: #b7a7ff;
+      font-size: 10px;
+      letter-spacing: 3px;
+      line-height: 1.8;
+    }
+
+    h1 {
+      margin-top: 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 400;
+      font-size: clamp(40px, 7vw, 62px);
+      line-height: 1.2;
+    }
+
+    h1 span {
+      display: block;
+      color: #b9b2ff;
+      font-style: italic;
+    }
+
+    .heading-description {
+      margin-top: 16px;
+      color: #aaa9c5;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .memory {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border: 1px solid #b8b5ff35;
+      border-radius: 15px;
+      background: linear-gradient(145deg, #252345, #111329);
+      cursor: pointer;
+      box-shadow: 0 15px 35px #00000025;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .memory:hover {
+      transform: translateY(-5px);
+      border-color: #b9aaff;
+    }
+
+    .memory img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.45s;
+    }
+
+    .memory:hover img {
+      transform: scale(1.05);
+    }
+
+    .memory-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 13px;
+      padding: 12px;
+      color: #d4caff;
+      background:
+        radial-gradient(ellipse at center, #6656a72a, transparent 70%);
+    }
+
+    .memory-placeholder .symbol {
+      font-size: 40px;
+      text-shadow: 0 0 25px #b7a7ff77;
+    }
+
+    .memory-placeholder small {
+      color: #b7b2d1;
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .memory-number {
+      position: absolute;
+      left: 9px;
+      right: 9px;
+      bottom: 9px;
+      padding: 10px 5px;
+      border: 1px solid #ffffff20;
+      border-radius: 8px;
+      background: #070816c9;
+      color: white;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      backdrop-filter: blur(10px);
+    }
+
+    .gallery-note {
+      margin: 30px auto;
+      color: #aaa9c5;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .navigation-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .navigation-buttons a {
+      display: inline-block;
+      padding: 13px 19px;
+      border: 1px solid #aaa0ff55;
+      border-radius: 11px;
+      color: #e8e4ff;
+      text-decoration: none;
+      font-size: 13px;
+      transition: transform 0.25s;
+    }
+
+    .navigation-buttons a:hover {
+      transform: translateY(-2px);
+    }
+
+    .navigation-buttons .primary {
+      border: 0;
+      background: linear-gradient(100deg, #8e7cf5, #657fe8);
+    }
+
+    .footer {
+      margin-top: 32px;
+      color: #8885ae;
+      text-align: center;
+      font-size: 9px;
+      letter-spacing: 2px;
+    }
+
+    /* Message popup */
+
+    .message-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background: #03040df0;
+      backdrop-filter: blur(12px);
+    }
+
+    .message-overlay.open {
+      display: flex;
+    }
+
+    .message-card {
+      position: relative;
+      width: min(100%, 410px);
+      padding: 40px 25px 30px;
+      border: 1px solid #b8a9ff55;
+      border-radius: 22px;
+      background:
+        radial-gradient(ellipse at top, #51458236, transparent 70%),
+        linear-gradient(145deg, #171832, #0b0c20);
+      box-shadow: 0 0 60px #8275ff22;
+      text-align: center;
+      animation: popup 0.35s ease;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      width: 35px;
+      height: 35px;
+      border: 0;
+      background: transparent;
+      color: #eeeaff;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    .message-symbol {
+      display: block;
+      margin-bottom: 20px;
+      color: #c7b9ff;
+      font-size: 38px;
+      text-shadow: 0 0 25px #8e7cf5;
+    }
+
+    .message-card h2 {
+      margin-bottom: 15px;
+      color: #c9c0ff;
+      font-family: Georgia, serif;
+      font-size: 25px;
+      font-weight: 400;
+    }
+
+    .message-text {
+      color: #f0eeff;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      line-height: 1.9;
+    }
+
+    .message-footer {
+      display: block;
+      margin-top: 25px;
+      color: #aaa4d2;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.4; }
+      to { opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes popup {
+      from { opacity: 0; transform: translateY(15px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @media (max-width: 600px) {
+      .gallery-page {
+        width: 94%;
+        padding-top: 25px;
+      }
+
+      .moon {
+        top: 5%;
+        right: 5%;
+        font-size: 48px;
+      }
+
+      .heading {
+        margin: 60px 0 28px;
+      }
+
+      .memory-grid {
+        gap: 9px;
+      }
+
+      .memory {
+        border-radius: 10px;
+      }
+
+      .memory-placeholder {
+        gap: 7px;
+        padding: 5px;
+      }
+
+      .memory-placeholder .symbol {
+        font-size: 27px;
+      }
+
+      .memory-placeholder small {
+        font-size: 9px;
+      }
+
+      .memory-number {
+        left: 4px;
+        right: 4px;
+        bottom: 4px;
+        padding: 7px 2px;
+        font-size: 7px;
+        letter-spacing: 0.7px;
+      }
+
+      .heading-description {
+        font-size: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sky" aria-hidden="true">
+    <div class="stars"></div>
+    <div class="moon" id="moon">☾</div>
+  </div>
+
+  <main class="gallery-page">
+
+    <nav class="top-nav">
+      <span>✦ OUR UNIVERSE</span>
+      <a href="chat.html">← Our Story</a>
+    </nav>
+
+    <header class="heading">
+      <p class="eyebrow">CHAPTER 02 · LITTLE MOMENTS</p>
+      <h1>Our <span>Memories</span></h1>
+      <p class="heading-description">
+        Intha six mattum memories illa❣️ ..itha vida neraiya irukku😘...innum namba neraiya memories aa 🤍create pannuvom💋💫
+      </p>
+    </header>
+
+    <section class="memory-grid" aria-label="Six memories">
+
+      <!-- PHOTO 1 -->
+      <button class="memory"
+        data-title="A Little Moment"
+        data-message="Intha pic😻 en life le marakka mudiyatha oru pic🤗... because namba 😘1st meet appo eduthathu🤍...then 1st uu edutha pic um itha 💋..so ithu romba romba 💗special aana oru pic💫">
+
+        <img src="photo1.jpg" alt="Memory one"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+        <div class="memory-placeholder" style="display:none">
+          <span class="symbol">☾</span>
+          <small>Photo 1</small>
+        </div>
+
+        <span class="memory-number">MEMORY 01</span>
+      </button>
+
+      <!-- PHOTO 2 -->
+      <button class="memory"
+        data-title="A Favourite Memory"
+        data-message="Intha pic um appotha eduthom🤗..but ithu naabagam ✨irukka❣️...nee epdi edukanumnu solli edutha pic ithu🥰...ithuvum enakku💋 romba special 🤍aana oru pic...itha paakumbothula unkuda 💟iruntha antha moment naabagam varum💗">
+
+        <img src="photo2.jpg" alt="Memory two"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+        <div class="memory-placeholder" style="display:none">
+          <span class="symbol">✦</span>
+          <small>Photo 2</small>
+        </div>
+
+        <span class="memory-number">MEMORY 02</span>
+      </button>
+
+      <!-- PHOTO 3 -->
+      <button class="memory"
+        data-title="Our Little Story"
+        data-message="Ithutha nee 1st time 💋enakkaga vacha story 😻.....then athula irukka antha🫂 line and antha song ume athukapparam enakku romba spl 💫aanatha maariduchi...itha nee enakkaga vacha ✨the enakkula periya surprise tha🤍💗">
+
+        <img src="photo3.jpg" alt="Memory three"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+        <div class="memory-placeholder" style="display:none">
+          <span class="symbol">♡</span>
+          <small>Photo 3</small>
+        </div>
+
+        <span class="memory-number">MEMORY 03</span>
+      </button>
+
+      <!-- PHOTO 4 -->
+      <button class="memory"
+        data-title="Always Remember"
+        data-message="Intha pic la naa unakku send panna 🫣...but nee atha story poduvanu Naa 🥹expect pannave illa...nee atha vachitta🥰...but naa anaikku 😘full aa avvalavu happy 😍aa atha neraiya time paathuttu iruntha💋...ithula irukka song Naa appotha 💟1st time kettane...nee yosikkalam🤔...ithula enna irukkunu🫂 ...intha chinna efforts kuda nee enakkaga 💗✨eduthu panirukkala...atha enakku spl ee🤍💫">
+
+        <img src="photo4.jpg" alt="Memory four"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+        <div class="memory-placeholder" style="display:none">
+          <span class="symbol">✧</span>
+          <small>Photo 4</small>
+        </div>
+
+        <span class="memory-number">MEMORY 04</span>
+      </button>
+
+      <!-- PHOTO 5 -->
+      <button class="memory"
+        data-title="A Little Magic"
+        data-message="Intha pic naabagam irukka🤗....ithu anaikku unkuda ponumnu 🥰Naa avvalavu aasaiya iruntha🫂...but some reasons naala athu anaikku nadakkala 🥺....but irunthalume unna anaikku paathu 😍unkuda time spend 😊pannanumnu nenaicha😘....athe maari anaikku nadanthuchum💋❣️ kuda.....😻anaikkume life la marakka mudiyatha oru memories tha🤍💫💗">
+
+        <img src="photo5.jpg" alt="Memory five"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+        <div class="memory-placeholder" style="display:none">
+          <span class="symbol">☄</span>
+          <small>Photo 5</small>
+        </div>
+
+        <span class="memory-number">MEMORY 05</span>
+      </button>
+
+      <!-- PHOTO 6 -->
+      <button class="memory"
+        data-title="To Be Continued"
+        data-message="Ithula Naa unakku kudutha antha kerchief 💫 aa naa thaniya meet panni kudaukanumnula evvalvo plan panna ❣️but athu nadakula😖...irunthalume ipdi kuduthathum🥰 oru nallathutha🤗... because ithu kudukura video irukku🫂💗...athu paakumbothume avvalavu happy aa irukkum🤍💫💋">
+
+        <img src="photo6.jpg" alt="Memory six"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+        <div class="memory-placeholder" style="display:none">
+          <span class="symbol">∞</span>
+          <small>Photo 6</small>
+        </div>
+
+        <span class="memory-number">MEMORY 06</span>
+      </button>
+
+    </section>
+
+    <p class="gallery-note">
+      Every picture holds a little story.<br>
+      Every memory has a place in this universe. 💙
+    </p>
+
+    <div class="navigation-buttons">
+      <a href="chat.html">← Previous Chapter</a>
+      <a href="video.html" class="primary">Continue Our Story ↗</a>
+    </div>
+
+    <p class="footer">MADE OF MEMORIES & MOONLIGHT ✧</p>
+
+  </main>
+
+  <!-- MESSAGE POPUP -->
+  <div class="message-overlay" id="messageOverlay"
+       role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+
+    <div class="message-card">
+      <button class="close-button" id="closePopup"
+        aria-label="Close message">×</button>
+
+      <span class="message-symbol">✧</span>
+
+      <h2 id="popupTitle">A Little Message</h2>
+
+      <p class="message-text" id="popupMessage"></p>
+
+      <span class="message-footer">
+        A LITTLE NOTE FROM THE HEART 💙
+      </span>
+    </div>
+
+  </div>
+
+  <script>
+    const memoryCards = document.querySelectorAll(".memory");
+    const messageOverlay = document.getElementById("messageOverlay");
+    const popupTitle = document.getElementById("popupTitle");
+    const popupMessage = document.getElementById("popupMessage");
+    const closePopup = document.getElementById("closePopup");
+    const moon = document.getElementById("moon");
+
+    // Click each photo to reveal its unique message
+    memoryCards.forEach(function (card) {
+      card.addEventListener("click", function () {
+        popupTitle.textContent = card.dataset.title;
+        popupMessage.textContent = card.dataset.message;
+        messageOverlay.classList.add("open");
+        closePopup.focus();
+      });
+    });
+
+    function hidePopup() {
+      messageOverlay.classList.remove("open");
+    }
+
+    closePopup.addEventListener("click", hidePopup);
+
+    messageOverlay.addEventListener("click", function (event) {
+      if (event.target === messageOverlay) {
+        hidePopup();
+      }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        hidePopup();
+      }
+    });
+
+    // Moon-click easter egg
+    moon.addEventListener("click", function () {
+      moon.textContent = moon.textContent === "☾" ? "☽" : "☾";
+      moon.style.color = "#c9c0ff";
+    });
+  </script>
+</body>
+</html>

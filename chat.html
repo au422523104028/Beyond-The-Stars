@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070816">
+  <title>Our Little Story ✨</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .story-page {
+      position: relative;
+      z-index: 1;
+      width: min(100% - 30px, 650px);
+      min-height: 100vh;
+      margin: auto;
+      padding: 45px 0 35px;
+    }
+
+    .story-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 38px;
+      color: #aaa9c5;
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    .story-top a {
+      color: #c4b8ff;
+      text-decoration: none;
+    }
+
+    .story-heading {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .story-heading h1 {
+      font-size: clamp(35px, 7vw, 49px);
+    }
+
+    .story-heading p {
+      margin-top: 12px;
+      color: #aaa9c5;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .chat-box {
+      padding: 23px 18px;
+      border: 1px solid #b8b5ff26;
+      border-radius: 22px;
+      background: #ffffff08;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 60px #00000020;
+    }
+
+    .chat-date {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #8885ae;
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    .chat-message {
+      width: fit-content;
+      max-width: 88%;
+      padding: 14px 16px;
+      margin-bottom: 17px;
+      border: 1px solid #a79aff25;
+      border-radius: 17px 17px 17px 5px;
+      background: #8174c21a;
+      color: #f0eeff;
+      font-size: 14px;
+      line-height: 1.8;
+      opacity: 0;
+      animation: appear 0.7s ease forwards;
+    }
+
+    .chat-message small {
+      display: block;
+      margin-top: 7px;
+      color: #aaa4d2;
+      font-size: 10px;
+    }
+
+    .chat-message.right {
+      margin-left: auto;
+      border-radius: 17px 17px 5px 17px;
+      border-color: #80aaff30;
+      background: #6588d51c;
+    }
+
+    .chat-message:nth-child(2) { animation-delay: 0.3s; }
+    .chat-message:nth-child(3) { animation-delay: 1s; }
+    .chat-message:nth-child(4) { animation-delay: 1.7s; }
+    .chat-message:nth-child(5) { animation-delay: 2.4s; }
+    .chat-message:nth-child(6) { animation-delay: 3.1s; }
+
+    .story-end {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .story-end p {
+      margin-bottom: 20px;
+      color: #b7b3d0;
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .next-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 14px 23px;
+      border-radius: 12px;
+      background: linear-gradient(100deg, #8e7cf5, #657fe8);
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.25s;
+    }
+
+    .next-button:hover {
+      transform: translateY(-3px);
+    }
+
+    .story-footer {
+      margin-top: 28px;
+      color: #777697;
+      text-align: center;
+      font-size: 9px;
+      letter-spacing: 2px;
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      .story-page { padding-top: 30px; }
+      .chat-box { padding: 19px 13px; }
+      .chat-message { font-size: 13px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .chat-message { animation: none; opacity: 1; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sky" aria-hidden="true">
+    <div class="stars"></div>
+    <div class="moon" id="moon">☾</div>
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+  </div>
+
+  <main class="story-page">
+    <div class="story-top">
+      <span>✦ OUR UNIVERSE</span>
+      <a href="index.html">← Back</a>
+    </div>
+
+    <header class="story-heading">
+      <p class="eyebrow">CHAPTER 01 · A LITTLE BEGINNING</p>
+      <h1>Our Little <span>Story</span></h1>
+      <p>
+        Sila feelings words-la solla mudiyadhu...<br>
+        but this little space will try. ✨
+      </p>
+    </header>
+
+    <section class="chat-box" aria-label="Our story messages">
+      <p class="chat-date">A LITTLE NOTE FROM THE HEART</p>
+
+      <div class="chat-message">
+        Hey, you. 🌙
+        <small>Somewhere in this universe...</small>
+      </div>
+
+      <div class="chat-message right">
+        Theriyuma? Life-la sila people namma day-ah
+        konjam special-a maathiduvaanga.
+        <small>Just a little thought 💭</small>
+      </div>
+
+      <div class="chat-message">
+        Unkooda pesura chinna moments kooda,
+        later nenachu paatha special memories-a maarum.
+        <small>One of my favourite things ✨</small>
+      </div>
+
+      <div class="chat-message right">
+        Every day perfect-a irukkanum nu illa...
+        but sila moments mattum always remember
+        panna thonum. 🤍
+        <small>Our little universe</small>
+      </div>
+
+      <div class="chat-message">
+        Idhu just beginning dhaan.
+        Innum sila memories, songs, and
+        solla vendiya words irukku...
+        <small>To be continued ♡</small>
+      </div>
+    </section>
+
+    <div class="story-end">
+      <p>
+        “Out of all the stars in the sky,<br>
+        some moments become our universe.”
+      </p>
+
+      <a class="next-button" href="gallery.html">
+        Explore Our Memories <span>↗</span>
+      </a>
+    </div>
+
+    <p class="story-footer">MADE OF MEMORIES & MOONLIGHT ✧</p>
+  </main>
+
+  <script>
+    const moon = document.getElementById("moon");
+
+    moon.addEventListener("click", function () {
+      moon.textContent = moon.textContent === "☾" ? "☽" : "☾";
+      moon.style.color = "#c9c0ff";
+    });
+  </script>
+</body>
+</html>

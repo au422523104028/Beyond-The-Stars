@@ -1,0 +1,418 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070816">
+  <title>One Last Surprise 💌</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 50% 100%, #302354, transparent 55%),
+        linear-gradient(150deg, #070816, #11132b, #080a1b);
+      color: #f4f2ff;
+      font-family: "Segoe UI", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+   
+     
+.stars {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(2px 2px at 15% 20%, #fff 50%, transparent 100%),
+    radial-gradient(1px 1px at 75% 35%, #c9c5ff 50%, transparent 100%),
+    radial-gradient(2px 2px at 50% 80%, #fff 50%, transparent 100%),
+    radial-gradient(1px 1px at 90% 65%, #b9b2ff 50%, transparent 100%);
+
+  background-size: 300px 300px;
+
+  animation: movingStars 30s linear infinite;
+}
+
+@keyframes movingStars {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-100px, -150px);
+  }
+}
+
+   
+
+    
+.moon {
+  position: fixed;
+  top: 22px;
+  right: 28px;
+  color: #eee8ff;
+  font-size: 80px;
+  text-shadow:
+    0 0 20px #c5b7ff,
+    0 0 45px #a99aff,
+    0 0 75px #8476ff;
+  animation: float 4s ease-in-out infinite;
+  cursor: pointer;
+  z-index: 2;
+}
+
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(92%, 650px);
+      min-height: 100vh;
+      margin: auto;
+      padding: 35px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: #b9aaff;
+      font-size: 10px;
+      letter-spacing: 3px;
+    }
+
+    h1 {
+      margin-top: 18px;
+      font-family: Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(35px, 7vw, 53px);
+      line-height: 1.25;
+    }
+
+    h1 span {
+      display: block;
+      color: #c4b8ff;
+      font-style: italic;
+    }
+
+    .intro {
+      max-width: 420px;
+      margin: 18px 0 35px;
+      color: #aaa9c5;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    /* Envelope */
+
+    .envelope-area {
+      width: 250px;
+      height: 190px;
+      position: relative;
+      margin: 15px auto 25px;
+      perspective: 900px;
+    }
+
+    .envelope {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 150px;
+      border: 1px solid #b8a9ff65;
+      border-radius: 7px;
+      background: linear-gradient(145deg, #6559a1, #332e63);
+      box-shadow: 0 15px 50px #00000050;
+      cursor: pointer;
+    }
+
+    .envelope::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: linear-gradient(145deg, #8d80c9, #514783);
+      clip-path: polygon(0 0, 50% 57%, 100% 0, 100% 100%, 0 100%);
+      border-radius: 5px;
+    }
+
+    .flap {
+      position: absolute;
+      inset: 0 0 auto;
+      z-index: 4;
+      height: 95px;
+      background: linear-gradient(145deg, #c2b5ff, #8072c4);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top center;
+      transition: transform 0.7s ease;
+    }
+
+    .seal {
+      position: absolute;
+      left: 50%;
+      top: 65px;
+      z-index: 5;
+      width: 43px;
+      height: 43px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: #e0d8ff;
+      color: #514783;
+      font-size: 21px;
+      box-shadow: 0 0 20px #c2b5ff55;
+      transition: opacity 0.3s;
+    }
+
+    .envelope-label {
+      position: absolute;
+      bottom: 18px;
+      left: 0;
+      right: 0;
+      z-index: 6;
+      color: #fff;
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    .letter-paper {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      height: 125px;
+      padding: 18px 10px;
+      border-radius: 5px;
+      background: #f4f0ff;
+      color: #292347;
+      font-family: Georgia, serif;
+      font-size: 14px;
+      opacity: 0;
+      transition: transform 0.8s ease, opacity 0.6s;
+    }
+
+    .envelope-area.open .flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .envelope-area.open .seal {
+      opacity: 0;
+    }
+
+    .envelope-area.open .letter-paper {
+      opacity: 1;
+      transform: translateY(-75px);
+    }
+
+    .open-button {
+      padding: 13px 23px;
+      border: 1px solid #b8a9ff70;
+      border-radius: 12px;
+      background: linear-gradient(100deg, #8e7cf5, #657fe8);
+      color: white;
+      font-size: 13px;
+      cursor: pointer;
+      box-shadow: 0 8px 30px #7065df25;
+      transition: transform 0.25s;
+    }
+
+    .open-button:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Revealed letter */
+
+    .letter {
+      display: none;
+      width: 100%;
+      margin-top: 25px;
+      padding: 30px 25px;
+      border: 1px solid #b8a9ff50;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #ffffff0c, #ffffff05);
+      box-shadow: 0 20px 55px #00000030;
+      text-align: left;
+      animation: reveal 0.9s ease;
+    }
+
+    .letter.show {
+      display: block;
+    }
+
+    .letter-heading {
+      margin-bottom: 20px;
+      color: #c8bdff;
+      font-family: Georgia, serif;
+      font-size: 26px;
+      font-weight: 400;
+      text-align: center;
+    }
+
+    .letter-content {
+      color: #e7e4f7;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 15px;
+      line-height: 2;
+      white-space: pre-line;
+    }
+
+    .signature {
+      margin-top: 25px;
+      color: #c8bdff;
+      font-family: Georgia, serif;
+      font-size: 19px;
+      font-style: italic;
+      text-align: right;
+    }
+
+    .navigation {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .navigation a {
+      padding: 12px 18px;
+      border: 1px solid #aaa0ff55;
+      border-radius: 10px;
+      color: #eeeaff;
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    .footer {
+      margin-top: 30px;
+      color: #8885ae;
+      font-size: 9px;
+      letter-spacing: 2px;
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.4; }
+      to { opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      .moon {
+        top: 12px;
+        right: 15px;
+        font-size: 38px;
+      }
+
+      .letter {
+        padding: 24px 18px;
+      }
+
+      .letter-content {
+        font-size: 14px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stars"></div>
+  <div class="moon">☾</div>
+
+  <main class="page">
+    <p class="eyebrow">THE FINAL CHAPTER · JUST FOR YOU</p>
+
+    <h1>One Last <span>Surprise 💌</span></h1>
+
+    <p class="intro">
+      There's something I wanted to say.<br>
+      It's waiting inside this little envelope.<br>
+      Open it when you're ready. ✨
+    </p>
+
+    <div class="envelope-area" id="envelopeArea">
+      <div class="letter-paper">
+        A little letter,<br>
+        with a lot of meaning. ♡
+      </div>
+
+      <div class="envelope" aria-hidden="true">
+        <div class="flap"></div>
+        <div class="seal">♡</div>
+        <span class="envelope-label">OPEN WITH LOVE</span>
+      </div>
+    </div>
+
+    <button class="open-button" id="openLetter">
+      Open Your Letter ✧
+    </button>
+
+    <article class="letter" id="letter">
+      <h2 class="letter-heading">A Little Note From My Heart</h2>
+
+      <p class="letter-content">Namba love panni one year aaga pothu🤍💋💫...itha naa unakku crt aa November 24 send panlamnu nenaicha 😶...but paravala🤗 munadiye send pandra😻....intha one year unkuda Naa happy aa irunthirukka💋😍...athe samaiyam neraiya hurt un aagirukka🤐...naanum unna neraiya hurt panirukka😔...athu ellathukkume romba romba sorry 🥺🤧... ithukapram unna hurt pannatha maari Naa nadanthuppa💟💗.....unala Naa neraiya vishayam kathukutta🤍🫂....then athu ellathukkume romba thanks 🙏🏻✨
+        
+        Enakku enna soldrathune therila😊.... because nee vanthathukku apram😍en life la enna problem vanthalume🤧Naa happy aa irukurathukku ore reason nee mattum tha🥹....then Naa happy aa irukka reason um neetha🫂 ...nee evvalvutha ena hurt aakkunalume😢 enakku un mela konjam kuda kovam la varathu💗...yenu therila unna avvalavu pudikkum🤍...unna miss panida kudathunu mattum😩confident aa crt aa irukka😻....Ippa nambalukulla distance irukalam🥺....but unna pathi yosikkatha second illa🫠 ....ithula unakku epdi therithunu tharila🙂...but naa sollanumnu nenaichathu ithula😔...so atha Naa intha letter la soldra🫤...innum neraiya irukku aana enakku🙊athula epdi soldrathunu therila❤️‍🩹..onnu mattum ennala crt aa solla mudium✨....nee illana naa illa🤍❤️‍🩹... avvalavutha.....I love you🤍😘...I love you as always💗🫂💫.....nee epdi vantha😶yen vanthanula🤔enakku theriyathu😞...but nee vanthutta ithukapram Naa iruppa unkuda❣️ athu entha situation aana irunthalume🤗I love you chloooo 🤍🫂😘💋🌙
+
+        Sometimes illa most of the time nee pandra vishayam ellame enakku hurt aagum🥺...but naa unkitta solla maatta🙂 .. because nee athunala hurt aaga kudathunu🫂...aana ippo athunala enakku romba hurt aaguthu🥲...atha Naa epdi react pandrathune theriyama🙃ena suthi irukkavanga😞kurippa appa amma melatha kaatra🫥...ithaiye Naa ippotha🤧realise panna ..so atha ithukapramum unakitta sollalana😶...ena vida appa amma kku tha athigama kastatha kudupanu therinchitha😓 unkitaiye Naa itha sonna...illana Ippa kuda unkitta sollirukka maata...😐nee pandrathula enakku feel aagum en mela unakku love illanu🥺....athunalatha appappo Naa unkitta keppa☹️.... because nee illana ena la irukka mudiyathu...unakke therium nee pesalana 😣Naa epdi irupanu...but athula ippo Naa evvalvo change panitta ...ippo la anthalavukula😌feel pandarthe illa...ithuvum bayamatha irukkum...yena enga enakku unmela irukka🫤priority and importance ellame koranjudumonu...itha nee padikumbothu🤔unakku vera maari kuda feel aagum...but it's ok😒...enakku feel aaguratha Naa unakku soldra🤐 ...nee ippavum itha purinjikka maatanum enkku therium😖...but parava illa unkitta sonna ndra oru aaruthale pothum enakku❤️‍🩹...enakuda pesu pesu konja neramathunu vanthu vanthu unkitta Kenji Kenji pesa soldrathu enakku oru maari irukku🤧😓.... because love indarthu thana varanum✨....ketto kenjiyo varathu illala💔...unakku puriumnu nenaikkura ithu🤍....
+      </p>
+
+      <p class="signature">With all my heart 🤍</p>
+    </article>
+
+    <div class="navigation">
+      <a href="video.html">← Back to Our Song</a>
+      <a href="index.html">↺ Start Again</a>
+    </div>
+
+    <p class="footer">OUR LITTLE UNIVERSE · ALWAYS A MEMORY ✦</p>
+  </main>
+
+  <script>
+    const openButton = document.getElementById("openLetter");
+    const envelopeArea = document.getElementById("envelopeArea");
+    const letter = document.getElementById("letter");
+
+    openButton.addEventListener("click", function () {
+      envelopeArea.classList.add("open");
+      letter.classList.add("show");
+      openButton.textContent = "Your Surprise Is Opened ♡";
+
+      letter.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+      openButton.disabled = true;
+    });
+  </script>
+</body>
+</html>
